@@ -36,8 +36,11 @@ def tweetToAll(tweet):
 			pass
 		else:
 			bro_text = "@" + mate + " " + status_text
-			api.update_status(status=bro_text)
-			# print bro_text
+			try:
+				api.update_status(in_reply_to_status_id=reply_id,status=bro_text)
+				print "Tweeted: " + bro_text
+			except TweepError:
+				print "Error: Couldn't tweet: " + bro_text
 
 class TweetListener(StreamListener):
 	""" A listener handles tweets are the received from the stream. 
