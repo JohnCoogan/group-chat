@@ -30,7 +30,7 @@ def tweetToAll(tweet):
 	elif sender_name == 'robrhinehart':
 		status_text += " -RR"
 	else:
-		status_text += " -??"
+		status_text += " -@" + sender_name
 	for mate in ROOMMATES:
 		if sender_name == mate or sender_name == '1011Rosa':
 			pass
