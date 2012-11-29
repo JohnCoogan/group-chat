@@ -1,1 +1,1 @@
-worker: python rosa.py
+worker: python groupchat.py
