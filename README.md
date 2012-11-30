@@ -7,7 +7,7 @@ After creating a memorable Twitter handle and authenticating with the Twitter AP
 Twitter Rate Limits
 -------------------
 Keep in mind that the Twitter rate limits apply not only to API calls but tweets themselves. Tweets are currently limited to 1000 per day broken into semi-hourly intervals. This works out to about 20 per half hour. If you try and use this with a large group, you will bump into this limit very frequently. I find it works best for groups of 5.
-More info: https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following
+More info: [Twitter Rate Limits](https://support.twitter.com/articles/15364-about-twitter-limits-update-api-dm-and-following)
 
 Files
 ------
@@ -18,20 +18,20 @@ Files
 Setup
 ------------------
 Only a few variables need to be changed to get this up an running.
-1. 	Create a new account for the bot: http://twitter.com
-2. 	Register for a developer account and create an app: http://dev.twitter.com
-3.	Create an OAuth token for your app and copy the keys over to groupchat.py
-4.	Make sure the bot is following your desired list of friends and add their handles to the list.
-5.	Test by tweeting at the bot!
+1. Create a new account for the bot: http://twitter.com
+1. Register for a developer account and create an app: http://dev.twitter.com
+1. Create an OAuth token for your app and copy the keys over to groupchat.py
+1. Make sure the bot is following your desired list of friends and add their handles to the list.
+1. Test by tweeting at the bot!
 
 Deployment
 ------------------
 This script can easily be deployed to Heroku, AWS, or any server host with reasonable uptime.
 
 For Heroku (the simplist IMO):
-1. 	heroku create [optional name]
-2. 	git push heroku master
-3.	heroku ps:scale worker=1
-4.	Test by tweeting at the bot / checking heroku logs
+1. `heroku create [optional name]`
+1. `git push heroku master`
+1. `heroku ps:scale worker=1`
+1. Test by tweeting at the bot / checking `heroku logs`
 
 Contact me on Twitter about anything: [@JohnCoogan](http://twitter.com/johncoogan)
