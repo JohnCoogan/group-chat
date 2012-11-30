@@ -18,20 +18,20 @@ Files
 Setup
 ------------------
 Only a few variables need to be changed to get this up an running.
-1. Create a new account for the bot: http://twitter.com
-1. Register for a developer account and create an app: http://dev.twitter.com
-1. Create an OAuth token for your app and copy the keys over to groupchat.py
-1. Make sure the bot is following your desired list of friends and add their handles to the list.
-1. Test by tweeting at the bot!
+*	Create a new account for the bot: http://twitter.com
+*	Register for a developer account and create an app: http://dev.twitter.com
+*	Create an OAuth token for your app and copy the keys over to groupchat.py
+*	Make sure the bot is following your desired list of friends and add their handles to the list.
+*	Test by tweeting at the bot!
 
 Deployment
 ------------------
 This script can easily be deployed to Heroku, AWS, or any server host with reasonable uptime.
 
 For Heroku (the simplist IMO):
-1. `heroku create [optional name]`
-1. `git push heroku master`
-1. `heroku ps:scale worker=1`
-1. Test by tweeting at the bot / checking `heroku logs`
+*	`heroku create [optional name]`
+*	`git push heroku master`
+*	`heroku ps:scale worker=1`
+*	Test by tweeting at the bot / checking `heroku logs`
 
 Contact me on Twitter about anything: [@JohnCoogan](http://twitter.com/johncoogan)
