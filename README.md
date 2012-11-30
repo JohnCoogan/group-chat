@@ -11,27 +11,27 @@ More info: https://support.twitter.com/articles/15364-about-twitter-limits-updat
 
 Files
 ------
-* 	groupchat.py: Main script logic
-*	Procfile: Runs the script as a worker on heroku.
-*	requirements.txt: Ensures Tweepy is installed.
+* 	__groupchat.py:__ Main python application.
+*	__Procfile:__ Runs the script as a worker on heroku.
+*	__requirements.txt:__ Ensures Tweepy is installed.
 
 Setup
 ------------------
 Only a few variables need to be changed to get this up an running.
-1 	Create a new account for the bot: http://twitter.com
-2 	Register for a developer account and create an app: http://dev.twitter.com
-3	Create an OAuth token for your app and copy the keys over to groupchat.py
-4	Make sure the bot is following your desired list of friends and add their handles to the list.
-5	Test by tweeting at the bot!
+1. 	Create a new account for the bot: http://twitter.com
+2. 	Register for a developer account and create an app: http://dev.twitter.com
+3.	Create an OAuth token for your app and copy the keys over to groupchat.py
+4.	Make sure the bot is following your desired list of friends and add their handles to the list.
+5.	Test by tweeting at the bot!
 
 Deployment
 ------------------
 This script can easily be deployed to Heroku, AWS, or any server host with reasonable uptime.
 
 For Heroku (the simplist IMO):
-	1 	heroku create [optional name]
-	2 	git push heroku master
-	3	heroku ps:scale worker=1
-	4	Test by tweeting at the bot / checking heroku logs
+1. 	heroku create [optional name]
+2. 	git push heroku master
+3.	heroku ps:scale worker=1
+4.	Test by tweeting at the bot / checking heroku logs
 
 Contact me on Twitter about anything: [@JohnCoogan](http://twitter.com/johncoogan)
