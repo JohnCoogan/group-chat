@@ -20,7 +20,7 @@ Setup
 Only a few variables need to be changed to get this up an running.
 *	Create a new account for the bot: http://twitter.com
 *	Register for a developer account and create an app: http://dev.twitter.com
-*	Create an OAuth token for your app and copy the keys over to groupchat.py
+*   Execute __setup__ in the route directory to set config variables.
 *	Make sure the bot is following your desired list of friends and add their handles to the list.
 *	Test by tweeting at the bot!
 

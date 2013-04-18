@@ -11,18 +11,11 @@ from tweepy import Stream
 from tweepy import API
 from tweepy.utils import import_simplejson
 
+from json import load as json_loader
+
 json = import_simplejson()
 
-##
-#  Set these 6 global varaibles to customize your bot.
-##
-# Register and create tokens at http://dev.twitter.com
-CONSUMER_KEY = 'Enter your consumer key here'
-CONSUMER_SECRET = 'Enter your consumer secret here'
-ACCESS_TOKEN = 'Enter your access token here'
-ACCESS_SECRET = 'Enter your access token secret here'
-BOT_NAME = 'Enter the screen_name here without an @'
-FRIENDS = ['Enter', 'a', 'list', 'of', 'screen_names']
+CONFIG = json_loader(open('config.json'))
 
 ##
 # Core Bot Logic, no need to change anything below.
@@ -30,11 +23,11 @@ FRIENDS = ['Enter', 'a', 'list', 'of', 'screen_names']
 def tweetToAll(tweet):
 	reply_id = tweet['id']
 	# remove mention of bot & trailing space
-	status_text = tweet['text'].replace('@' + BOT_NAME + ' ','').replace('@' + BOT_NAME,'')
+	status_text = tweet['text'].replace('@' + CONFIG.BOT_NAME + ' ','').replace('@' + CONFIG.BOT_NAME,'')
 	sender_name = tweet['user']['screen_name']
-	status_text += '" -@' + sender_name
-	for friend in FRIENDS:
-		if sender_name == friend or sender_name == BOT_NAME:
+	status_text += '" -' + sender_name
+	for friend in CONFIG.FRIENDS:
+		if sender_name == friend or sender_name == CONFIG.BOT_NAME:
 			pass
 		else:
 			send_text = '@' + friend + ' "' + status_text
@@ -42,7 +35,10 @@ def tweetToAll(tweet):
 				api.update_status(in_reply_to_status_id=reply_id,status=send_text)
 				print 'Tweeted: ' + send_text
 			except TweepError:
-				print 'Error: Failed to tweet: ' + send_text
+				try:
+					api.update_status(status="@%s Sorry, I couldn't send that Tweet out, something went wrong!" % sender_name
+				except TweepError:
+					print 'Error: Failed to tweet: ' + send_text
 
 class TweetListener(StreamListener):
 	# A listener handles tweets are the received from the stream. 
@@ -52,7 +48,7 @@ class TweetListener(StreamListener):
 		# Return False to stop stream and close connection.
 		if 'entities' in data:
 			tweet = json.loads(data)
-			if BOT_NAME in [x['screen_name'] for x in tweet['entities']['user_mentions']]:
+			if CONFIG.BOT_NAME in [x['screen_name'] for x in tweet['entities']['user_mentions']]:
 				tweetToAll(tweet)
 		elif 'delete' in data:
 			delete = json.loads(data)['delete']['status']
@@ -83,7 +79,7 @@ def openStream():
 
 # Authenticate and create API object.
 if __name__ == "__main__":
-	auth = OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-	auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
+	auth = OAuthHandler(CONFIG.CONSUMER_KEY, CONFIG.CONSUMER_SECRET)
+	auth.set_access_token(CONFIG.ACCESS_TOKEN, CONFIG.ACCESS_SECRET)
 	api = API(auth)
 	openStream()

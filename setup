@@ -1,0 +1,40 @@
+#!/usr/bin/python
+import json as _json
+
+print "\nThanks for downloading Twitter Group Chat!"
+print "\nTo get setup, we need Twitter OAuth tokens."
+print "Get them here: http://dev.twitter.com"
+print "-" * 60
+
+##
+#  Set these 6 global varaibles to customize your bot.
+##
+# Register and create tokens at http://dev.twitter.com
+CONSUMER_KEY = raw_input('\nEnter your consumer key:\n')
+CONSUMER_SECRET = raw_input('\nEnter your consumer secret:\n')
+ACCESS_TOKEN = raw_input('\nEnter your access token:\n')
+ACCESS_SECRET = raw_input('\nEnter your access token secret:\n')
+BOT_NAME = raw_input('\nEnter the bot\'s Twitter handle without an @:\n')
+FRIENDS = []
+
+print "\nNow add some friends' Twitter names!\n"
+_adding = True
+_counter = 1
+while _adding:
+    FRIENDS.append(raw_input('#%s: ' % _counter))
+    _counter += 1
+    if raw_input('Want to add more? (Y / N): ').lower() != 'y':
+        _adding = False
+
+EXPORT = {k:v for k,v in globals().items() if k[0] != '_'}
+_json.dump(EXPORT, open('config.json', 'w'), indent=2)
+
+print "\nAll done configuring, thanks for using Group Chat!\n"
+
+print """
+For Heroku hosting (the simplist IMO):
+*   `heroku create [optional name]`
+*   `git push heroku master`
+*   `heroku ps:scale worker=1`
+*   Test by tweeting at the bot / checking `heroku logs`
+"""
