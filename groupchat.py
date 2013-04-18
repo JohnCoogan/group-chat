@@ -58,7 +58,6 @@ class TweetListener(StreamListener):
         elif 'limit' in data:
             if self.on_limit(json.loads(data)['limit']['track']) is False:
                 return False
-
     def on_error(self, status):
         print status
     def on_limit(self, track):
