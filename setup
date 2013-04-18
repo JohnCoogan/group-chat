@@ -14,14 +14,16 @@ CONSUMER_KEY = raw_input('\nEnter your consumer key:\n')
 CONSUMER_SECRET = raw_input('\nEnter your consumer secret:\n')
 ACCESS_TOKEN = raw_input('\nEnter your access token:\n')
 ACCESS_SECRET = raw_input('\nEnter your access token secret:\n')
-BOT_NAME = raw_input('\nEnter the bot\'s Twitter handle without an @:\n')
+BOT_NAME = raw_input('\nEnter the bot\'s Twitter handle (no @):\n').lstrip('@')
 FRIENDS = []
 
-print "\nNow add some friends' Twitter names!\n"
+print "\nNow add some friends' Twitter names!"
+print "        (No @ necessary.)\n"
+
 _adding = True
 _counter = 1
 while _adding:
-    FRIENDS.append(raw_input('#%s: ' % _counter))
+    FRIENDS.append(raw_input('#%s: ' % _counter).lstrip('@'))
     _counter += 1
     if raw_input('Want to add more? (Y / N): ').lower() != 'y':
         _adding = False
