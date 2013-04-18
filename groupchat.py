@@ -14,9 +14,9 @@ json = import_simplejson()
 
 from os import environ as CONFIG
 
-for k,v in CONFIG.items():
-	if k.upper() == k:
-		print "%s | %s" % (k,v)
+import re
+
+BOT_RE = re.compile('@%s\s?' % CONFIG['BOT_NAME'], re.IGNORECASE)
 
 ##
 # Core Bot Logic, no need to change anything below.
@@ -24,7 +24,7 @@ for k,v in CONFIG.items():
 def tweetToAll(tweet):
 	reply_id = tweet['id']
 	# remove mention of bot & trailing space
-	status_text = tweet['text'].replace('@' + CONFIG['BOT_NAME'] + ' ','').replace('@' + CONFIG['BOT_NAME'],'')
+	status_text = BOT_RE.sub('',tweet['text'])
 	sender_name = tweet['user']['screen_name']
 	status_text += '" -' + sender_name
 	for friend in json.loads(CONFIG['FRIENDS']):
@@ -49,7 +49,7 @@ class TweetListener(StreamListener):
 		# Return False to stop stream and close connection.
 		if 'entities' in data:
 			tweet = json.loads(data)
-			if CONFIG['BOT_NAME'] in [x['screen_name'] for x in tweet['entities']['user_mentions']]:
+			if CONFIG['BOT_NAME'] in [x['screen_name'].lower() for x in tweet['entities']['user_mentions']]:
 				tweetToAll(tweet)
 		elif 'delete' in data:
 			delete = json.loads(data)['delete']['status']
