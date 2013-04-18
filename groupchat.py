@@ -10,12 +10,13 @@ from tweepy import OAuthHandler
 from tweepy import Stream
 from tweepy import API
 from tweepy.utils import import_simplejson
-
-from json import load as json_loader
-
 json = import_simplejson()
 
-CONFIG = json_loader(open('config.json'))
+from os import environ as CONFIG
+
+for k,v in CONFIG.items():
+	if k.upper() == k:
+		print "%s | %s" % (k,v)
 
 ##
 # Core Bot Logic, no need to change anything below.
@@ -26,7 +27,7 @@ def tweetToAll(tweet):
 	status_text = tweet['text'].replace('@' + CONFIG['BOT_NAME'] + ' ','').replace('@' + CONFIG['BOT_NAME'],'')
 	sender_name = tweet['user']['screen_name']
 	status_text += '" -' + sender_name
-	for friend in CONFIG['FRIENDS']:
+	for friend in json.loads(CONFIG['FRIENDS']):
 		if sender_name == friend or sender_name == CONFIG['BOT_NAME']:
 			pass
 		else:

@@ -6,15 +6,27 @@ print "\nTo get setup, we need Twitter OAuth tokens."
 print "Get them here: http://dev.twitter.com"
 print "-" * 60
 
+CONFIG = open('.env', 'w')
+
 ##
 #  Set these 6 global varaibles to customize your bot.
 ##
 # Register and create tokens at http://dev.twitter.com
 CONSUMER_KEY = raw_input('\nEnter your consumer key:\n')
+CONFIG.write("CONSUMER_KEY=%s\n" % CONSUMER_KEY)
+
 CONSUMER_SECRET = raw_input('\nEnter your consumer secret:\n')
+CONFIG.write("CONSUMER_SECRET=%s\n" % CONSUMER_SECRET)
+
 ACCESS_TOKEN = raw_input('\nEnter your access token:\n')
+CONFIG.write("ACCESS_TOKEN=%s\n" % ACCESS_TOKEN)
+
 ACCESS_SECRET = raw_input('\nEnter your access token secret:\n')
+CONFIG.write("ACCESS_SECRET=%s\n" % ACCESS_SECRET)
+
 BOT_NAME = raw_input('\nEnter the bot\'s Twitter handle (no @):\n').lstrip('@')
+CONFIG.write("BOT_NAME=%s\n" % BOT_NAME)
+
 FRIENDS = []
 
 print "\nNow add some friends' Twitter names!"
@@ -28,8 +40,8 @@ while _adding:
     if raw_input('Want to add more? (Y / N): ').lower() != 'y':
         _adding = False
 
-EXPORT = {k:v for k,v in globals().items() if k[0] != '_'}
-_json.dump(EXPORT, open('config.json', 'w'), indent=2)
+CONFIG.write("FRIENDS=%s\n" % _json.dumps(FRIENDS))
+CONFIG.close()
 
 print "\nAll done configuring, thanks for using Group Chat!\n"
 
